@@ -1,0 +1,182 @@
+// HTML
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://css.gg/add-r.css' rel='stylesheet'>
+    <link href='https://css.gg/pen.css' rel='stylesheet'>
+    <link rel="stylesheet" href="ToDo.css">
+    <title>ToDo List</title>
+</head>
+<body>
+    <header>
+        <h1>To Do List</h1>
+    </header>
+
+    <main>
+
+        <div id="sectionAdd">
+            <label for="novaTar">Tarefa:</label>
+            <input type="text" id="newDo">
+            <label for="novaTar">Descrição:</label>
+            <textarea name="discricao" id="newDis" cols="10" rows="10"></textarea>
+            <button onclick="gerarTarefa()" id="newDoBtn">Adicionar</button>
+        </div>
+        <h1>Tarefas:</h1>
+        <div class="mainTasks">
+            
+        </div>
+    </main>
+
+    <script src="./ToDo.js"></script>
+</body>
+</html>
+
+// CSS
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+header h1{
+    display: flex;
+    justify-content: center;
+    padding-top: 40px;
+    padding-bottom: 60px;
+    font-size: 80px;
+    color: rgb(243, 243, 243);
+}
+
+body {
+    background-color: rgb(92, 92, 200);
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+#sectionAdd {
+    display: grid;
+    margin-top: 20vh;
+    grid-column: 2/3;
+}
+
+#sectionAdd label{
+    color: white;
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+#newDo { 
+    padding-left: 10px;
+    margin-bottom: 20px;
+    height: 50px;
+    font-size: 20px;
+    border-radius: 20px;
+    border: none;
+}
+
+#newDis { 
+    padding-left: 10px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    height: 50px;
+    font-size: 20px;
+    text-align: start;
+    border-radius: 20px;
+    border: none;
+    height: 100px; 
+}
+
+#sectionAdd button {
+    border: none;
+    padding: 15px;
+    font-size: 20px;
+    margin-bottom: 10vh;
+    color: white;
+    border-radius: 30px;
+    background-color: rgb(36, 36, 121);
+    cursor: pointer;
+}
+
+#sectionAdd button:hover {
+    background-color: rgb(27, 27, 97) ;
+}
+
+main h1 {
+    color: white;
+    font-size: 50px;
+    margin-bottom: 60px;
+}
+
+.tarefas {
+    margin-left: 50px;
+    margin-bottom: 30px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 20px;
+    width: 300px;
+    box-shadow: 0 0 1em rgb(0, 0, 0);
+}
+
+.tarefas input {
+    width: 20px;
+    height: 20px;
+
+}
+
+.tarefas label {
+    font-size: 22px;
+    position: relative;
+    bottom: 3px;
+    left: 5px
+}
+
+.tarefas h5 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.tarefas p {
+    color:rgba(51, 51, 51, 0.801);
+    word-wrap: break-word;
+}
+
+// JAVASCRIPT
+
+const newDo = document.getElementById("newDo");
+const newDis = document.getElementById("newDis");
+const newDoBtn = document.getElementById("newDoBtn");
+const mainT = document.querySelector(".mainTasks");
+const resolvido = document.getElementById("resolvido");
+const tarefas = document.querySelectorAll(".tarefas");
+
+gerarTarefa = () => {
+
+    if(newDo.value === "") {
+        alert('insira o nome da sua tarefa');
+        return
+    }
+
+    mainT.innerHTML += ` 
+       <div class="tarefas">
+            <input onclick="resolve()" type="checkbox">
+            <label for="tarefa">${newDo.value}</label>
+            <h5>Descrição</h5>
+            <p>${newDis.value}</p>
+        </div>
+`
+
+newDo.value = "";
+newDis.value = "";
+}
+
+resolve = () => {
+    let e = event.target;
+    e.parentNode.remove();
+}
+
