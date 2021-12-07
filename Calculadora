@@ -1,0 +1,175 @@
+// HTML
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://css.gg/trash.css' rel='stylesheet'>
+    <link rel="stylesheet" href="./calculadora.css">
+    <title>Calculadora</title>
+</head>
+<body>
+    <section class="containerMain">
+
+        <div class="inputPlace">
+            <input id="inputVal" type="text">
+        </div>
+        <section class="container">
+            <button id="C">C</button>
+            <button id="CE">CE</button>
+            <button class="simbolos" id="barra">/</button>
+            <button class="numero" id="tecla9">9</button>
+            <button class="numero" id="tecla8">8</button>
+            <button class="numero" id="tecla7">7</button>
+            <button class="numero" id="multiplicacao">X</button>
+            <button class="numero" id="tecla6">6</button>
+            <button class="numero" id="tecla5">5</button>
+            <button class="numero" id="tecla4">4</button>
+            <button class="simbolos">-</button>
+            <button id="tecla3">3</button>
+            <button id="tecla2">2</button>
+            <button id="tecla1">1</button>
+            <button class="simbolos">+</button>
+            <button id="tecla0">0</button>
+            <button class="simbolos">.</button>
+            <button id="total">=</button>    
+    </section>
+    <script src="./calculadora.js"></script>
+</body>
+</html>
+
+// CSS
+
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.container {
+    display: grid;
+    padding: 20px;
+    column-gap: 5px;
+    row-gap: 4px;
+    grid-template-columns: 1fr 1fr 1fr ;
+    background-color: white;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 40px;
+    height: 700px;
+    width: 600px;
+    margin: 70px;
+    margin-left: 90px;
+}
+
+body {
+    background-color: rgb(119, 165, 240);
+}
+
+input {
+    margin: 30px;
+    margin-top: 80px;
+    margin-bottom: -30px;
+    margin-left: 90px;
+    font-size: 70px;
+    text-align: end;
+    border-radius: 40px;
+    height: 150px;
+    max-width: 600px;
+    padding-right: 20px;
+}
+
+#deletar {
+    display: grid;
+    grid-column: 3/6;
+    text-align: center;
+}
+
+#total {
+    grid-column: 1/6;
+}
+
+#multiplicacao {
+    display: grid;
+    grid-column: 4/6;
+    text-align: center;
+    padding-left: 70px;
+    padding-right: 90px;
+}
+
+.simbolos {
+    display: grid;
+    grid-column: 4/6;
+
+}
+
+button {
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgb(72, 52, 90);
+    color: #fff;
+    font-size: 30px;
+}
+
+#CE {
+    display: grid;
+    grid-column: 3/4;
+    padding-top: 30px;
+}
+
+#C {
+    display: grid;
+    grid-column: 1/3;
+    padding-top: 30px;
+}
+
+#tecla0 {
+    display: grid;
+    grid-column: 1/4;
+}
+
+// JAVASCRIPT
+
+const inputVal = document.getElementById("inputVal");
+const numeros = document.querySelectorAll('[id*=tecla]');
+const simbolos = document.querySelectorAll('.simbolos')
+const total = document.getElementById('total');
+const C = document.getElementById('C');
+
+document.addEventListener('click', function(e) {
+
+    if(e.target.textContent === '1') inputVal.value += 1;
+    if(e.target.textContent === '2') inputVal.value += 2;
+    if(e.target.textContent === '3') inputVal.value += 3;
+    if(e.target.textContent === '4') inputVal.value += 4;
+    if(e.target.textContent === '5') inputVal.value += 5;
+    if(e.target.textContent === '6') inputVal.value += 6;
+    if(e.target.textContent === '7') inputVal.value += 7;
+    if(e.target.textContent === '8') inputVal.value += 8;
+    if(e.target.textContent === '9') inputVal.value += 9;
+    if(e.target.textContent === '0') inputVal.value += 0;
+    if(e.target.textContent === 'CE') inputVal.value = '';
+    if(e.target.textContent === 'X') inputVal.value += '*';
+    if(e.target.textContent === '-') inputVal.value += '-';
+    if(e.target.textContent === '+') inputVal.value += '+';
+    if(e.target.textContent === '/') inputVal.value += '/';
+    if(e.target.textContent === '.') inputVal.value += '.';
+
+    console.log( typeof inputVal.value)
+    //console.log(e.target.textContent)
+})
+
+C.addEventListener('click', function() {
+    
+})
+
+total.addEventListener('click', function() {
+    let resul = inputVal.value.replace(/[^-()\d/*+.]/g, '');
+    inputVal.value = eval(resul)
+
+    if(eval(resul) === undefined) inputVal.value = '';
+})
+
